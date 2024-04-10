@@ -1,0 +1,20 @@
+{
+  "name": "crypto-pro-vue-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SL-TX/crypto-pro-vue-example.git"
+  },
+  "private": false,
+  "dependencies": {
+    "vue": "^3.4.21",
+    "crypto-pro": "^2.5.2",
+    "vite": "^5.2.8",
+    "@vitejs/plugin-vue": "^5.0.4"
+  }
+}
