@@ -1,18 +1,18 @@
 <script setup>
- const message = defineModel()
+const message = defineModel()
 </script>
 
 <template>
-    <legend>Создание подписи</legend>
-    <label>Подписываемое сообщение: *</label>
-    <br/>
-    <textarea
-            cols="80"
-            rows="5"
-            placeholder="Введите сообщение"
-            :value="message"
-            autoFocus
-            required/>
+  <legend>Создание подписи</legend>
+  <label>Подписываемое сообщение: *</label>
+  <br/>
+  <textarea
+      :value="message"
+      autoFocus
+      cols="80"
+      placeholder="Введите сообщение"
+      required
+      rows="5"/>
 </template>
 
 <style scoped>

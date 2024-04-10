@@ -6,16 +6,16 @@ const systemInfo = ref();
 const systemInfoError = ref();
 
 isValidSystemSetup()
-    .then((res)=>getSystemInfo()
-        .then((res2)=>{
-            systemInfo.value = {...res2,isValidSystemSetup: res}
+    .then((res) => getSystemInfo()
+        .then((res2) => {
+          systemInfo.value = {...res2, isValidSystemSetup: res}
         })
-        .catch((error)=>{
-            systemInfoError.value = error.message
+        .catch((error) => {
+          systemInfoError.value = error.message
         })
     )
-    .catch((error)=>{
-        systemInfoError.value = error.message
+    .catch((error) => {
+      systemInfoError.value = error.message
     })
 </script>
 
@@ -26,7 +26,7 @@ isValidSystemSetup()
         ) : (
             systemInfoError || null
         )
-        }}</pre>
+      }}</pre>
 </template>
 
 <style scoped>

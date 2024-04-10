@@ -20,40 +20,40 @@ const signature = ref('')
 const signatureStatus = ref('Не создана')
 const signatureError = ref(null)
 
-const createSignature= async () => {
-    signature.value = ''
-    signatureError.value = null
-    hash.value = ''
-    hashError.value = null
-    hashStatus.value = 'Вычисляется...'
-    await createHash(message.value)
-        .then((res)=> {
-            hash.value = res
+const createSignature = async () => {
+  signature.value = ''
+  signatureError.value = null
+  hash.value = ''
+  hashError.value = null
+  hashStatus.value = 'Вычисляется...'
+  await createHash(message.value)
+      .then((res) => {
+        hash.value = res
+      })
+      .catch((error) => {
+        hashError.value = error.message
+      })
+  hashStatus.value = 'Не вычислен'
+  signatureStatus.value = 'Создается...'
+  if (detachedSignature.value) {
+    await createDetachedSignature(cert.value.thumbprint, hash.value)
+        .then((res) => {
+          signature.value = res
         })
-        .catch((error)=> {
-            hashError.value = error.message
-        })
-    hashStatus.value = 'Не вычислен'
-    signatureStatus.value = 'Создается...'
-    if (detachedSignature.value) {
-        await createDetachedSignature(cert.value.thumbprint,hash.value)
-            .then((res)=> {
-                signature.value = res
-            })
-            .catch((error)=> {
-                signatureError.value = error.message
-            })
-        signatureStatus.value = 'Не создана'
-        return;
-    }
-    await createAttachedSignature(cert.value.thumbprint,message.value)
-        .then((res)=> {
-            signature.value = res
-        })
-        .catch((error)=> {
-            signatureError.value = error.message
+        .catch((error) => {
+          signatureError.value = error.message
         })
     signatureStatus.value = 'Не создана'
+    return;
+  }
+  await createAttachedSignature(cert.value.thumbprint, message.value)
+      .then((res) => {
+        signature.value = res
+      })
+      .catch((error) => {
+        signatureError.value = error.message
+      })
+  signatureStatus.value = 'Не создана'
 }
 </script>
 
@@ -63,7 +63,7 @@ const createSignature= async () => {
       <Message v-model="message"/>
       <br><br>
       <Certificate v-model="cert"></Certificate>
-        {{detachedSignature}}
+      {{ detachedSignature }}
       <SignatureType v-model="detachedSignature"></SignatureType>
       <br><br>
       <hr>
@@ -86,8 +86,8 @@ const createSignature= async () => {
 
   <fieldset>
     <legend>Информация о системе</legend>
-      <CustomSystemInfo/>
-      <SystemInfo/>
+    <CustomSystemInfo/>
+    <SystemInfo/>
   </fieldset>
 </template>
 
